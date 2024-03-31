@@ -1,8 +1,10 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Index from "./pages/Index.jsx";
-import Login from "./pages/Login.jsx";
-import Signup from "./pages/Signup.jsx";
+import Index from "./pages/Index";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import { UserProvider } from "./contexts/UserContext";
+
+console.log("Rendering App component");
 
 function App() {
   return (

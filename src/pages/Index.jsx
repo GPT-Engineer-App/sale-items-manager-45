@@ -78,12 +78,24 @@ const Index = () => {
     });
   };
 
+  console.log("All items:", items);
+
   const filteredItems = items.filter((item) => {
     const matchesSearchTerm = item.title.toLowerCase().includes(searchTerm.toLowerCase()) || item.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCondition = selectedCondition === "" || item.condition === selectedCondition;
+    const matchesStatus = selectedStatus === "" || item.status === selectedStatus;
     const matchesPrice = maxPrice === "" || item.price <= parseInt(maxPrice);
+
+    console.log("Filtering item:", item);
+    console.log("Search term match:", matchesSearchTerm);
+    console.log("Condition match:", matchesCondition);
+    console.log("Status match:", matchesStatus);
+    console.log("Price match:", matchesPrice);
+
     return matchesSearchTerm && matchesCondition && matchesStatus && matchesPrice;
   });
+
+  console.log("Filtered items:", filteredItems);
 
   const { user, logout } = useContext(UserContext);
 
