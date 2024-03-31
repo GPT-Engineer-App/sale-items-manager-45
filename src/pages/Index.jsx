@@ -95,9 +95,11 @@ const Index = () => {
             </Button>
           </>
         )}
-        <Button leftIcon={<FaPlus />} colorScheme="blue" onClick={onOpen} ml={4}>
-          Post an Item
-        </Button>
+        {user && (
+          <Button leftIcon={<FaPlus />} colorScheme="blue" onClick={onOpen} ml={4}>
+            Post an Item
+          </Button>
+        )}
       </Flex>
 
       <Flex mb={8}>
