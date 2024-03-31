@@ -114,7 +114,7 @@ const Index = () => {
           <option value="Sold">Sold</option>
         </Select>
         <Input placeholder="Max Price" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} mr={4} />
-        <Button leftIcon={<FaSearch />} colorScheme="blue">
+        <Button leftIcon={<FaSearch />} colorScheme="blue" px={6} width="150px">
           Search
         </Button>
       </Flex>
