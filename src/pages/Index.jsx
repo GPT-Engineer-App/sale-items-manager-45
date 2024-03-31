@@ -31,7 +31,7 @@ const items = [
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCondition, setSelectedCondition] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("For Sale");
   const [maxPrice, setMaxPrice] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const toast = useToast();
@@ -61,10 +61,26 @@ const Index = () => {
     });
   };
 
+  const handleBuy = (itemId) => {
+    const updatedItems = items.map((item) => {
+      if (item.id === itemId) {
+        return { ...item, status: "Sold" };
+      }
+      return item;
+    });
+    console.log("Updated items:", updatedItems);
+    toast({
+      title: "Item bought.",
+      description: "You have successfully bought this item.",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
   const filteredItems = items.filter((item) => {
     const matchesSearchTerm = item.title.toLowerCase().includes(searchTerm.toLowerCase()) || item.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCondition = selectedCondition === "" || item.condition === selectedCondition;
-    const matchesStatus = selectedStatus === "" || item.status === selectedStatus;
     const matchesPrice = maxPrice === "" || item.price <= parseInt(maxPrice);
     return matchesSearchTerm && matchesCondition && matchesStatus && matchesPrice;
   });
@@ -111,7 +127,7 @@ const Index = () => {
           <option value="Used - Good">Used - Good</option>
           <option value="Used - Acceptable">Used - Acceptable</option>
         </Select>
-        <Select placeholder="Status" value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)} mr={4}>
+        <Select placeholder="Status" value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)} mr={4} defaultValue="For Sale">
           <option value="For Sale">For Sale</option>
           <option value="Sold">Sold</option>
         </Select>
@@ -123,7 +139,7 @@ const Index = () => {
 
       <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={8}>
         {filteredItems.map((item) => (
-          <Box key={item.id} borderWidth={1} borderRadius="lg" p={4}>
+          <Box key={item.id} borderWidth={1} borderRadius="lg" p={4} position="relative">
             <Image src={item.image} alt={item.title} mb={4} />
             <Heading as="h2" size="md" mb={2}>
               {item.title}
@@ -141,6 +157,11 @@ const Index = () => {
             <Text>
               <strong>Status:</strong> {item.status}
             </Text>
+            {user && item.status === "For Sale" && (
+              <Button colorScheme="green" size="sm" mt={4} onClick={() => handleBuy(item.id)}>
+                Buy
+              </Button>
+            )}
           </Box>
         ))}
       </Grid>
