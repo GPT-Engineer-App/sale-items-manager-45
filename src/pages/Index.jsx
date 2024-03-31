@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Box, Heading, Text, Input, Button, Grid, Image, Select, Flex, Spacer, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Textarea, useToast } from "@chakra-ui/react";
+import BuyModal from "./BuyModal";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
@@ -34,6 +35,8 @@ const Index = () => {
   const [selectedStatus, setSelectedStatus] = useState("For Sale");
   const [maxPrice, setMaxPrice] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen: isBuyModalOpen, onOpen: onOpenBuyModal, onClose: onCloseBuyModal } = useDisclosure();
+  const [selectedItemId, setSelectedItemId] = useState(null);
   const toast = useToast();
 
   const [newItem, setNewItem] = useState({
@@ -62,6 +65,11 @@ const Index = () => {
   };
 
   const handleBuy = (itemId) => {
+    onOpenBuyModal();
+    setSelectedItemId(itemId);
+  };
+
+  const onItemBought = (itemId) => {
     const updatedItems = items.map((item) => {
       if (item.id === itemId) {
         return { ...item, status: "Sold" };
@@ -217,6 +225,7 @@ const Index = () => {
           </ModalBody>
         </ModalContent>
       </Modal>
+      <BuyModal isOpen={isBuyModalOpen} onClose={onCloseBuyModal} itemId={selectedItemId} onItemBought={onItemBought} />
     </Box>
   );
 };
