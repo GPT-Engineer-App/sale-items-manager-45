@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Box, Heading, Text, Input, Button, Grid, Image, Select, Flex, Spacer, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Textarea, useToast } from "@chakra-ui/react";
 import { FaPlus, FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
 const items = [
   {
@@ -67,6 +69,8 @@ const Index = () => {
     return matchesSearchTerm && matchesCondition && matchesStatus && matchesPrice;
   });
 
+  const { user, logout } = useContext(UserContext);
+
   return (
     <Box p={8}>
       <Flex align="center" mb={8}>
@@ -74,7 +78,24 @@ const Index = () => {
           Marketplace
         </Heading>
         <Spacer />
-        <Button leftIcon={<FaPlus />} colorScheme="blue" onClick={onOpen}>
+        {user ? (
+          <>
+            <Text mr={4}>Welcome, {user.firstName}!</Text>
+            <Button colorScheme="blue" onClick={logout}>
+              Logout
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button as={Link} to="/login" colorScheme="blue" mr={4}>
+              Login
+            </Button>
+            <Button as={Link} to="/signup" colorScheme="blue">
+              Sign Up
+            </Button>
+          </>
+        )}
+        <Button leftIcon={<FaPlus />} colorScheme="blue" onClick={onOpen} ml={4}>
           Post an Item
         </Button>
       </Flex>
