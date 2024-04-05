@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
 import { Box, Heading, Text, Input, Button, Grid, Image, Select, Flex, Spacer, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, FormControl, FormLabel, Textarea, useToast } from "@chakra-ui/react";
 import BuyModal from "./BuyModal";
+import LoginModal from "./Login";
+import SignupModal from "./Signup";
 import { FaPlus, FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 
 const items = [
@@ -36,6 +37,8 @@ const Index = () => {
   const [maxPrice, setMaxPrice] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isBuyModalOpen, onOpen: onOpenBuyModal, onClose: onCloseBuyModal } = useDisclosure();
+  const { isOpen: isLoginOpen, onOpen: onOpenLogin, onClose: onCloseLogin } = useDisclosure();
+  const { isOpen: isSignupOpen, onOpen: onOpenSignup, onClose: onCloseSignup } = useDisclosure();
   const [selectedItemId, setSelectedItemId] = useState(null);
   const toast = useToast();
 
@@ -109,10 +112,11 @@ const Index = () => {
 
   return (
     <Box p={8}>
-      <Flex align="center" mb={8}>
+      <Flex align="center" mb={8} direction={{ base: "column", md: "row" }}>
         <Heading as="h1" size="xl" mr={4}>
           Marketplace
         </Heading>
+        <Spacer />
         <Spacer />
         {user ? (
           <>
@@ -123,10 +127,10 @@ const Index = () => {
           </>
         ) : (
           <>
-            <Button as={Link} to="/login" colorScheme="blue" mr={4}>
+            <Button colorScheme="blue" mr={4} onClick={onOpenLogin}>
               Login
             </Button>
-            <Button as={Link} to="/signup" colorScheme="blue">
+            <Button colorScheme="blue" onClick={onOpenSignup}>
               Sign Up
             </Button>
           </>
@@ -220,6 +224,8 @@ const Index = () => {
         </ModalContent>
       </Modal>
       <BuyModal isOpen={isBuyModalOpen} onClose={onCloseBuyModal} itemId={selectedItemId} onItemBought={onItemBought} />
+      <LoginModal isOpen={isLoginOpen} onClose={onCloseLogin} />
+      <SignupModal isOpen={isSignupOpen} onClose={onCloseSignup} />
     </Box>
   );
 };
