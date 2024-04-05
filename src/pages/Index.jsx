@@ -146,17 +146,18 @@ const Index = () => {
         )}
       </Flex>
 
-      <Flex mb={8} direction={{ base: "column", md: "row" }} gap={4}>
-        <Input placeholder="Search items..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-        <Select placeholder="Condition" value={selectedCondition} onChange={(e) => setSelectedCondition(e.target.value)}>
-          <option value="New">New</option>
-          <option value="Used - Like New">Used - Like New</option>
-          <option value="Used - Very Good">Used - Very Good</option>
-          <option value="Used - Good">Used - Good</option>
-          <option value="Used - Acceptable">Used - Acceptable</option>
-        </Select>
-
-        <Button leftIcon={<FaSearch />} colorScheme="blue" width={{ base: "100%", md: "200px" }}>
+      <Flex mb={8} direction="column" gap={4}>
+        <Flex direction={{ base: "column", md: "row" }} gap={4}>
+          <Input placeholder="Search items..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+          <Select placeholder="Condition" value={selectedCondition} onChange={(e) => setSelectedCondition(e.target.value)}>
+            <option value="New">New</option>
+            <option value="Used - Like New">Used - Like New</option>
+            <option value="Used - Very Good">Used - Very Good</option>
+            <option value="Used - Good">Used - Good</option>
+            <option value="Used - Acceptable">Used - Acceptable</option>
+          </Select>
+        </Flex>
+        <Button leftIcon={<FaSearch />} colorScheme="blue" width="100%">
           Search
         </Button>
       </Flex>
