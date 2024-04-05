@@ -34,7 +34,6 @@ const Index = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCondition, setSelectedCondition] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("For Sale");
-  const [maxPrice, setMaxPrice] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isOpen: isBuyModalOpen, onOpen: onOpenBuyModal, onClose: onCloseBuyModal } = useDisclosure();
   const { isOpen: isLoginOpen, onOpen: onOpenLogin, onClose: onCloseLogin } = useDisclosure();
@@ -102,15 +101,13 @@ const Index = () => {
     const matchesSearchTerm = item.title.toLowerCase().includes(searchTerm.toLowerCase()) || item.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCondition = selectedCondition === "" || item.condition === selectedCondition;
     const matchesStatus = selectedStatus === "" || item.status === selectedStatus;
-    const matchesPrice = maxPrice === "" || item.price <= parseInt(maxPrice);
 
     console.log("Filtering item:", item);
     console.log("Search term match:", matchesSearchTerm);
     console.log("Condition match:", matchesCondition);
     console.log("Status match:", matchesStatus);
-    console.log("Price match:", matchesPrice);
 
-    return matchesSearchTerm && matchesCondition && matchesStatus && matchesPrice;
+    return matchesSearchTerm && matchesCondition && matchesStatus;
   });
 
   console.log("Filtered items:", filteredItems);
@@ -158,7 +155,7 @@ const Index = () => {
           <option value="Used - Good">Used - Good</option>
           <option value="Used - Acceptable">Used - Acceptable</option>
         </Select>
-        <Input placeholder="Max Price" value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} />
+
         <Button leftIcon={<FaSearch />} colorScheme="blue" width={{ base: "100%", md: "200px" }}>
           Search
         </Button>
