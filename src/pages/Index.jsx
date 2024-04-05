@@ -112,8 +112,8 @@ const Index = () => {
 
   return (
     <Box p={8}>
-      <Flex align="center" mb={8} direction={{ base: "column", md: "row" }}>
-        <Heading as="h1" size="xl" mr={4}>
+      <Flex align="center" mb={8} direction={{ base: "row", md: "row" }} flexWrap="wrap">
+        <Heading as="h1" size="xl" mr={4} mb={{ base: 4, md: 0 }}>
           Marketplace
         </Heading>
         <Spacer />
@@ -127,7 +127,7 @@ const Index = () => {
           </>
         ) : (
           <>
-            <Button colorScheme="blue" mr={4} onClick={onOpenLogin}>
+            <Button colorScheme="blue" mr={{ base: 2, md: 4 }} onClick={onOpenLogin}>
               Login
             </Button>
             <Button colorScheme="blue" onClick={onOpenSignup}>
