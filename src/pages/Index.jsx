@@ -39,7 +39,7 @@ const Index = () => {
   const { isOpen: isBuyModalOpen, onOpen: onOpenBuyModal, onClose: onCloseBuyModal } = useDisclosure();
   const { isOpen: isLoginOpen, onOpen: onOpenLogin, onClose: onCloseLogin } = useDisclosure();
   const { isOpen: isSignupOpen, onOpen: onOpenSignup, onClose: onCloseSignup } = useDisclosure();
-  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
   const toast = useToast();
 
   const [newItem, setNewItem] = useState({
@@ -67,9 +67,9 @@ const Index = () => {
     });
   };
 
-  const handleBuy = (itemId) => {
+  const handleBuy = (item) => {
     onOpenBuyModal();
-    setSelectedItemId(itemId);
+    setSelectedItem(item);
   };
 
   const onItemBought = (itemId) => {
@@ -223,7 +223,7 @@ const Index = () => {
           </ModalBody>
         </ModalContent>
       </Modal>
-      <BuyModal isOpen={isBuyModalOpen} onClose={onCloseBuyModal} itemId={selectedItemId} onItemBought={onItemBought} />
+      <BuyModal isOpen={isBuyModalOpen} onClose={onCloseBuyModal} selectedItem={selectedItem} onItemBought={onItemBought} />
       <LoginModal isOpen={isLoginOpen} onClose={onCloseLogin} />
       <SignupModal isOpen={isSignupOpen} onClose={onCloseSignup} />
     </Box>
