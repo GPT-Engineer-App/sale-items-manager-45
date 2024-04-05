@@ -147,19 +147,17 @@ const Index = () => {
       </Flex>
 
       <Flex mb={8} direction="column" gap={4}>
-        <Flex direction={{ base: "column", md: "row" }} gap={4}>
-          <Input placeholder="Search items..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-          <Select placeholder="Condition" value={selectedCondition} onChange={(e) => setSelectedCondition(e.target.value)}>
-            <option value="New">New</option>
-            <option value="Used - Like New">Used - Like New</option>
-            <option value="Used - Very Good">Used - Very Good</option>
-            <option value="Used - Good">Used - Good</option>
-            <option value="Used - Acceptable">Used - Acceptable</option>
-          </Select>
-        </Flex>
+        <Input placeholder="Search items..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
         <Button leftIcon={<FaSearch />} colorScheme="blue" width="100%">
           Search
         </Button>
+        <Select placeholder="Condition" value={selectedCondition} onChange={(e) => setSelectedCondition(e.target.value)}>
+          <option value="New">New</option>
+          <option value="Used - Like New">Used - Like New</option>
+          <option value="Used - Very Good">Used - Very Good</option>
+          <option value="Used - Good">Used - Good</option>
+          <option value="Used - Acceptable">Used - Acceptable</option>
+        </Select>
       </Flex>
 
       <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={8}>
