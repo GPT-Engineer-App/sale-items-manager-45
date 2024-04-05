@@ -176,7 +176,7 @@ const Index = () => {
             </Text>
 
             {user && item.status === "For Sale" && (
-              <Button colorScheme="green" size="sm" mt={4} onClick={() => handleBuy(item.id)}>
+              <Button colorScheme="green" size="sm" mt={4} onClick={() => handleBuy(item)}>
                 Buy
               </Button>
             )}

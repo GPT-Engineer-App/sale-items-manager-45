@@ -3,6 +3,9 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, Modal
 // Stripe related imports and initialization have been removed as they cannot be used
 
 const BuyModal = ({ isOpen, onClose, selectedItem, onItemBought }) => {
+  if (!selectedItem) {
+    return null;
+  }
   const [nameOnCard, setNameOnCard] = useState("");
   const [creditCardNumber, setCreditCardNumber] = useState("");
   const [expiry, setExpiry] = useState("");
