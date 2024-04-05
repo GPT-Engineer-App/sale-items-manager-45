@@ -48,14 +48,21 @@ const Index = () => {
     condition: "",
     zipCode: "",
     price: "",
+    image: null,
   });
+
+  const handleImageChange = (e) => {
+    setNewItem({ ...newItem, image: e.target.files[0] });
+  };
 
   const handleInputChange = (e) => {
     setNewItem({ ...newItem, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
-    // TODO: Implement actual submission logic
+    if (newItem.image) {
+      console.log("Image to upload:", newItem.image.name);
+    }
     console.log("New item submitted:", newItem);
     onClose();
     toast({
@@ -216,6 +223,10 @@ const Index = () => {
             <FormControl mb={4}>
               <FormLabel>Price</FormLabel>
               <Input name="price" type="number" value={newItem.price} onChange={handleInputChange} />
+            </FormControl>
+            <FormControl mb={4}>
+              <FormLabel>Image</FormLabel>
+              <Input type="file" onChange={handleImageChange} accept="image/*" />
             </FormControl>
             <Button colorScheme="blue" onClick={handleSubmit}>
               Submit
