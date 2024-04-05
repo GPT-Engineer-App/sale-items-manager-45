@@ -147,10 +147,21 @@ const Index = () => {
       </Flex>
 
       <Flex mb={8} direction="column" gap={4}>
-        <Input placeholder="Search items..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
-        <Button leftIcon={<FaSearch />} colorScheme="blue" width="100%">
-          Search
-        </Button>
+        <Input
+          placeholder="Search items..."
+          value={searchTerm}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+
+            const filteredItems = items.filter((item) => {
+              const matchesSearchTerm = item.title.toLowerCase().includes(e.target.value.toLowerCase()) || item.description.toLowerCase().includes(e.target.value.toLowerCase());
+              const matchesCondition = selectedCondition === "" || item.condition === selectedCondition;
+              const matchesStatus = selectedStatus === "" || item.status === selectedStatus;
+              return matchesSearchTerm && matchesCondition && matchesStatus;
+            });
+            console.log("Filtered items:", filteredItems);
+          }}
+        />
         <Select placeholder="Condition" value={selectedCondition} onChange={(e) => setSelectedCondition(e.target.value)}>
           <option value="New">New</option>
           <option value="Used - Like New">Used - Like New</option>
