@@ -1,13 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Box, Heading, FormControl, FormLabel, Input, Button, useToast } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { FormControl, FormLabel, Input, Button, useToast, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody } from "@chakra-ui/react";
 import { UserContext } from "../contexts/UserContext";
 
-const Login = () => {
+const LoginModal = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useContext(UserContext);
-  const navigate = useNavigate();
   const toast = useToast();
 
   const handleSubmit = (e) => {
@@ -21,29 +19,33 @@ const Login = () => {
       duration: 3000,
       isClosable: true,
     });
-    navigate("/");
+    onClose();
   };
 
   return (
-    <Box p={8}>
-      <Heading as="h1" size="xl" mb={8}>
-        Login
-      </Heading>
-      <form onSubmit={handleSubmit}>
-        <FormControl mb={4}>
-          <FormLabel>Email</FormLabel>
-          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </FormControl>
-        <FormControl mb={4}>
-          <FormLabel>Password</FormLabel>
-          <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </FormControl>
-        <Button type="submit" colorScheme="blue">
-          Login
-        </Button>
-      </form>
-    </Box>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Login</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <form onSubmit={handleSubmit}>
+            <FormControl mb={4}>
+              <FormLabel>Email</FormLabel>
+              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </FormControl>
+            <FormControl mb={4}>
+              <FormLabel>Password</FormLabel>
+              <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </FormControl>
+            <Button type="submit" colorScheme="blue">
+              Login
+            </Button>
+          </form>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 
-export default Login;
+export default LoginModal;
