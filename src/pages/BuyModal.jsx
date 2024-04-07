@@ -68,7 +68,7 @@ const BuyModal = ({ isOpen, onClose, selectedItem, onItemBought }) => {
             <Text mb={4}>
               <strong>Total:</strong> ${selectedItem.price}
             </Text>
-            <Button type="submit" colorScheme="blue">
+            <Button type="submit" colorScheme="red" fontWeight="bold" borderRadius="md" boxShadow="md">
               Charge ${selectedItem.price}
             </Button>
           </form>

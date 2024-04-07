@@ -115,9 +115,9 @@ const Index = () => {
   const { user, logout } = useContext(UserContext);
 
   return (
-    <Box p={8}>
+    <Box p={12} bg="background">
       <Flex align="center" mb={8} direction={{ base: "row", md: "row" }} flexWrap="wrap">
-        <Heading as="h1" size="xl" mr={4} mb={{ base: 4, md: 0 }}>
+        <Heading as="h1" size="2xl" mr={4} mb={{ base: 4, md: 0 }} fontWeight="bold" fontFamily="sans-serif">
           Marketplace
         </Heading>
         <Spacer />
@@ -125,22 +125,22 @@ const Index = () => {
         {user ? (
           <>
             <Text mr={4}>Welcome, {user.firstName}!</Text>
-            <Button colorScheme="blue" onClick={logout}>
+            <Button colorScheme="red" onClick={logout} fontWeight="bold" borderRadius="md" boxShadow="md">
               Logout
             </Button>
           </>
         ) : (
           <>
-            <Button colorScheme="blue" mr={{ base: 2, md: 4 }} onClick={onOpenLogin}>
+            <Button colorScheme="red" mr={{ base: 2, md: 4 }} onClick={onOpenLogin} fontWeight="bold" borderRadius="md" boxShadow="md">
               Login
             </Button>
-            <Button colorScheme="blue" onClick={onOpenSignup}>
+            <Button colorScheme="red" onClick={onOpenSignup} fontWeight="bold" borderRadius="md" boxShadow="md">
               Sign Up
             </Button>
           </>
         )}
         {user && (
-          <Button leftIcon={<FaPlus />} colorScheme="blue" onClick={onOpen} ml={4}>
+          <Button leftIcon={<FaPlus />} colorScheme="red" onClick={onOpen} ml={4} fontWeight="bold" borderRadius="md" boxShadow="md">
             Post an Item
           </Button>
         )}
@@ -173,7 +173,7 @@ const Index = () => {
 
       <Grid templateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={8}>
         {filteredItems.map((item) => (
-          <Box key={item.id} borderWidth={1} borderRadius="lg" p={4} position="relative">
+          <Box key={item.id} borderWidth={2} borderRadius="xl" p={6} position="relative" boxShadow="lg" bg="white">
             <Image src={item.image} alt={item.title} mb={4} />
             <Heading as="h2" size="md" mb={2}>
               {item.title}
@@ -190,7 +190,7 @@ const Index = () => {
             </Text>
 
             {user && item.status === "For Sale" && (
-              <Button colorScheme="green" size="sm" mt={4} onClick={() => handleBuy(item)}>
+              <Button colorScheme="red" size="md" mt={4} onClick={() => handleBuy(item)} fontWeight="bold" borderRadius="md" boxShadow="md">
                 Buy
               </Button>
             )}
