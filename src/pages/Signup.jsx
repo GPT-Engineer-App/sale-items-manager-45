@@ -63,7 +63,7 @@ const SignupModal = ({ isOpen, onClose }) => {
               <FormLabel>Password</FormLabel>
               <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </FormControl>
-            <Button type="submit" colorScheme="red" fontWeight="bold" borderRadius="md" boxShadow="md">
+            <Button type="submit" bg="red.900" color="white" fontWeight="black" borderRadius="2xl" boxShadow="dark-lg" px={8} py={6}>
               Sign Up
             </Button>
           </form>
